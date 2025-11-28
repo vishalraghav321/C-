@@ -24,9 +24,7 @@ int main() {
             special++;
         }
     }
-
     cout<<"No. of digits:" <<num<<endl;
     cout<<"No. of spaces:" <<space<<endl;
     cout<<"No. of special characters:" <<special<<endl;
-
 }
