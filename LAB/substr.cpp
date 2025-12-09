@@ -10,11 +10,11 @@ int main() {
 
     cout<< "Enter a substring to delete: ";
     getline(cin, substr);
-
-    cout<<"Substring is placed at: "<< str.find(substr)<<endl;
-    str.erase(str.find(substr), substr.length());
-
+    int pos = str.find(substr);
+    if(pos!= string::npos){
+    str.erase(pos, substr.length());
+    }
     cout<<"New String: "<<str;
 
-    
+return 0;    
 }

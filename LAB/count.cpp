@@ -5,9 +5,7 @@ using namespace std;
 
 int main() {
     string str;
-    int num =0;
-    int space = 0;
-    int special = 0;
+    int num =0, space = 0, special = 0;
     cout<<"Enter a string: ";
     getline(cin,str);
   
@@ -18,13 +16,13 @@ int main() {
         else if(c==' '){
             space++;
         }
-        else if(c>='A'&& c<='z'){
-        }
-        else{
+        else if(!(c>='A'&& c<='z')){
             special++;
+            
         }
     }
     cout<<"No. of digits:" <<num<<endl;
     cout<<"No. of spaces:" <<space<<endl;
     cout<<"No. of special characters:" <<special<<endl;
+    return 0;
 }
