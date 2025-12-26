@@ -49,6 +49,61 @@ public:
         }
     }
 
+    void moveZeroes(vector<int> &nums)
+    {
+        int left = 0;
+        int right = 0;
+        while (right < nums.size())
+        {
+            if (right < nums.size() && nums[left] != 0)
+            {
+                left++;
+                right++;
+                continue;
+            }
+            while (right < nums.size() && nums[right] == 0)
+            {
+                right++;
+            }
+            if (right < nums.size() && nums[left] == 0 && nums[right] != 0)
+            {
+                nums[left] = nums[right];
+                nums[right] = 0;
+                right++;
+                left++;
+            }
+        }
+    }
+
+    int removeDuplicates(vector<int> &nums)
+    {
+        int i = 1;
+        int right = 1;
+
+        while (right < nums.size())
+        {
+            if (nums[i] <= nums[i - 1])
+            {
+                while (right < nums.size() && nums[right] == nums[right - 1])
+                {
+                    right++;
+                }
+                if (right < nums.size())
+                {
+                    nums[i] = nums[right];
+                    i++;
+                    right++;
+                }
+            }
+            else
+            {
+                i++;
+                right++;
+            }
+        }
+        return i;
+    }
+
     vector<int> sortedSquares(vector<int> &nums)
     {
         int n = nums.size();
