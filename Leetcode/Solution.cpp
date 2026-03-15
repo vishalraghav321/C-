@@ -7,6 +7,30 @@ using namespace std;
 class Solution
 {
 public:
+int maxProfit(vector<int>& prices) {
+        int n[] = {0, 0};
+        int left = 0, right = 1;
+
+        while (right < prices.size()) {
+            if (prices[left] >= prices[right]) {
+                left = right;
+            }
+
+            int c = prices[right] - prices[left];
+            if (c > n[1]) {
+                n[0] = n[1];
+                n[1] = c;
+                left = right;
+            } else if (c > n[0]) {
+                n[0] = c;
+
+            }
+            right++;
+            if(prices[right]<prices[right-1]) left = right;
+        }
+        return n[0] + n[1];
+    }
+
     vector<int> twoSum(vector<int> &numbers, int target)
     {
         int i = 0;
