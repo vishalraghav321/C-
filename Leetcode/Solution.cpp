@@ -1,4 +1,5 @@
 #include <iostream>
+#include<deque>
 #include <vector>
 #include <cmath>
 #include <algorithm>
@@ -7,26 +8,61 @@ using namespace std;
 class Solution
 {
 public:
-int maxProfit(vector<int>& prices) {
+    vector<int> maxSlidingWindow(vector<int> &nums, int k)
+    {
+        deque<int> d;
+        int r = 0, l = 0;
+        vector<int> result;
+        // Works on Monotonic Decreasing Queue
+        // Largest element stays at front;
+        while (r < nums.size())
+        {
+            while (!d.empty() &&
+                   nums[d.back()] < nums[r])
+            { // Remove every element that is
+              // smaller than current element.
+                d.pop_back();
+            }
+            d.push_back(r);
+            if (l > d.front())
+                d.pop_front(); // To remove element that goes out of the sliding
+                               // window
+            if (r + 1 >= k)
+            {
+                result.push_back(nums[d.front()]); // Add q.front element to output array
+                l++;
+            }
+            r++;
+        }
+        return result;
+    }
+
+    int maxProfit(vector<int> &prices)
+    {
         int n[] = {0, 0};
         int left = 0, right = 1;
 
-        while (right < prices.size()) {
-            if (prices[left] >= prices[right]) {
+        while (right < prices.size())
+        {
+            if (prices[left] >= prices[right])
+            {
                 left = right;
             }
 
             int c = prices[right] - prices[left];
-            if (c > n[1]) {
+            if (c > n[1])
+            {
                 n[0] = n[1];
                 n[1] = c;
                 left = right;
-            } else if (c > n[0]) {
+            }
+            else if (c > n[0])
+            {
                 n[0] = c;
-
             }
             right++;
-            if(prices[right]<prices[right-1]) left = right;
+            if (prices[right] < prices[right - 1])
+                left = right;
         }
         return n[0] + n[1];
     }
